@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量化交易中心 - Quant Trading Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chart-line"></i>
+                <span>QuantHub</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#strategies">策略</a></li>
+                <li><a href="#backtest">回测</a></li>
+                <li><a href="#portfolio">组合</a></li>
+                <li><a href="#education">学习</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>智能量化交易平台</h1>
+            <p>基于数据驱动的算法交易策略，助您在金融市场中获得稳定收益</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="startTrading()">开始交易</button>
+                <button class="btn-secondary" onclick="showDemo()">观看演示</button>
+            </div>
+        </div>
+        <div class="hero-chart">
+            <canvas id="heroChart"></canvas>
+        </div>
+    </section>
+
+    <!-- 功能特色 -->
+    <section class="features">
+        <div class="container">
+            <h2>核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>智能策略</h3>
+                    <p>机器学习驱动的交易策略，自动识别市场机会</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-history"></i>
+                    <h3>历史回测</h3>
+                    <p>基于历史数据的策略回测，验证策略有效性</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>风险控制</h3>
+                    <p>多层次风险管理体系，保护您的投资</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>实时分析</h3>
+                    <p>实时市场数据分析和交易信号生成</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 策略展示 -->
+    <section id="strategies" class="strategies">
+        <div class="container">
+            <h2>交易策略</h2>
+            <div class="strategy-tabs">
+                <button class="tab-btn active" onclick="showStrategy('momentum')">动量策略</button>
+                <button class="tab-btn" onclick="showStrategy('mean-reversion')">均值回归</button>
+                <button class="tab-btn" onclick="showStrategy('arbitrage')">套利策略</button>
+                <button class="tab-btn" onclick="showStrategy('ml')">机器学习</button>
+            </div>
+            
+            <div id="strategy-content" class="strategy-content">
+                <div class="strategy-info">
+                    <h3>动量交易策略</h3>
+                    <p>基于价格动量指标的交易策略，追踪市场趋势，捕捉上涨行情。</p>
+                    <div class="strategy-metrics">
+                        <div class="metric">
+                            <span class="metric-label">年化收益</span>
+                            <span class="metric-value positive">+23.5%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">最大回撤</span>
+                            <span class="metric-value negative">-8.2%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">夏普比率</span>
+                            <span class="metric-value">1.85</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="strategy-chart">
+                    <canvas id="strategyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 回测平台 -->
+    <section id="backtest" class="backtest">
+        <div class="container">
+            <h2>策略回测</h2>
+            <div class="backtest-form">
+                <div class="form-group">
+                    <label>选择策略</label>
+                    <select id="strategySelect">
+                        <option value="momentum">动量策略</option>
+                        <option value="mean-reversion">均值回归</option>
+                        <option value="bollinger">布林带策略</option>
+                        <option value="macd">MACD策略</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>回测周期</label>
+                    <select id="timeframe">
+                        <option value="1y">1年</option>
+                        <option value="3y">3年</option>
+                        <option value="5y">5年</option>
+                        <option value="10y">10年</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>初始资金</label>
+                    <input type="number" id="initialCapital" value="100000" min="10000">
+                </div>
+                <button class="btn-primary" onclick="runBacktest()">开始回测</button>
+            </div>
+            <div id="backtest-results" class="backtest-results">
+                <div class="results-summary">
+                    <div class="result-card">
+                        <h4>总收益率</h4>
+                        <span class="result-value positive">+45.2%</span>
+                    </div>
+                    <div class="result-card">
+                        <h4>年化收益率</h4>
+                        <span class="result-value positive">+15.3%</span>
+                    </div>
+                    <div class="result-card">
+                        <h4>最大回撤</h4>
+                        <span class="result-value negative">-12.8%</span>
+                    </div>
+                    <div class="result-card">
+                        <h4>胜率</h4>
+                        <span class="result-value">68.5%</span>
+                    </div>
+                </div>
+                <canvas id="backtestChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- 投资组合 -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>投资组合管理</h2>
+            <div class="portfolio-dashboard">
+                <div class="portfolio-summary">
+                    <div class="summary-card">
+                        <h3>总资产</h3>
+                        <p class="amount">¥1,234,567</p>
+                        <p class="change positive">+2.3% ↑</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>今日收益</h3>
+                        <p class="amount">¥+28,456</p>
+                        <p class="change positive">+2.4% ↑</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>持仓数量</h3>
+                        <p class="amount">15</p>
+                        <p class="change">只股票</p>
+                    </div>
+                </div>
+                <div class="portfolio-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>股票代码</th>
+                                <th>股票名称</th>
+                                <th>持仓数量</th>
+                                <th>成本价</th>
+                                <th>现价</th>
+                                <th>涨跌幅</th>
+                                <th>盈亏</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portfolioTable">
+                            <!-- 动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育资源 -->
+    <section id="education" class="education">
+        <div class="container">
+            <h2>量化学习资源</h2>
+            <div class="education-grid">
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>量化交易入门</h3>
+                    <p>从零开始学习量化交易的基本概念和策略开发</p>
+                    <button class="btn-outline">开始学习</button>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Python量化编程</h3>
+                    <p>使用Python进行量化策略开发和回测</p>
+                    <button class="btn-outline">开始学习</button>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <h3>技术分析策略</h3>
+                    <p>基于技术指标的量化交易策略开发</p>
+                    <button class="btn-outline">开始学习</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <p>专业的量化交易平台，为投资者提供智能化的交易解决方案</p>
+                </div>
+                <div class="footer-section">
+                    <h3>联系方式</h3>
+                    <p>邮箱: contact@quanthub.com</p>
+                    <p>电话: 400-123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>关注我们</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-wechat"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 QuantHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
