@@ -1,0 +1,25 @@
+# GitHub Pages 配置
+title: "量化交易中心"
+description: "专业的量化交易平台，为投资者提供智能化的交易解决方案"
+author: "QuantHub Team"
+
+# 主题设置
+theme: jekyll-theme-cayman
+show_downloads: true
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# 时间格式
+date_format: "%Y-%m-%d"
+
+# 分页
+paginate: 10
+paginate_path: "/blog/page:num/"
+
+# 社交链接
+social:
+  github: quanthub
+  email: contact@quan
